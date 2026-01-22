@@ -136,6 +136,13 @@ export default function App() {
             Join Game
           </button>
         </form>
+
+        <div className="absolute bottom-2 left-[50%] transform-[translateX(-50%)] text-gray-300 text-sm font-medium z-10">
+          built by{" "}
+          <a href="https://charbxl.com" className="underline text-green-600">
+            charbxl
+          </a>
+        </div>
       </div>
     );
   }
@@ -238,6 +245,13 @@ export default function App() {
           </div>
         </>
       )}
+
+      <div className="absolute bottom-2 left-[50%] transform-[translateX(-50%)] text-gray-300 text-sm font-medium z-10">
+        built by{" "}
+        <a href="https://charbxl.com" className="underline text-green-600">
+          charbxl
+        </a>
+      </div>
     </div>
   );
 }
