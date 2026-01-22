@@ -130,7 +130,7 @@ export default function App() {
             required
           />
           <button
-            className="bg-green-600 px-4 py-2 text-lg hover:opacity-90 cursor-pointer"
+            className="bg-green-600 px-4 py-2 text-lg hover:opacity-90 cursor-pointer font-medium"
             type="submit"
           >
             Join Game
