@@ -1,7 +1,11 @@
+import { EyeClosedIcon, EyeIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("https://nine999-api.onrender.com");
+const DEVELOPMENT = true;
+const socket = io(
+  DEVELOPMENT ? "http://localhost:3000" : "https://nine999-api.onrender.com",
+);
 
 function generateShareText(guesses, userId, didWin) {
   const myGuesses = guesses.filter((g) => g.userId === userId);
@@ -40,6 +44,7 @@ export default function App() {
   const [winner, setWinner] = useState(null);
 
   const [guesses, setGuesses] = useState([]);
+  const [viewNum, setViewNum] = useState(false);
 
   /* ---------------- SOCKET EVENTS ---------------- */
 
@@ -126,6 +131,7 @@ export default function App() {
               }
             }}
             required
+            autoFocus
           />
           <Button color="green" type="submit">
             Join Game
@@ -144,6 +150,18 @@ export default function App() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full bg-gray-950 text-white gap-4">
+      <h2 className="absolute top-8 left-[50%] transform-[translateX(-50%)] text-2xl flex flex-row gap-2 items-center justify-center font-semibold">
+        {viewNum ? secret : "■■■■"}
+        <button
+          className="text-gray-200 flex items-center justify-center bg-gray-700 px-1 py-0.5 cursor-pointer hover:opacity-80"
+          onClick={() => {
+            setViewNum(!viewNum);
+          }}
+        >
+          {!viewNum ? <EyeIcon /> : <EyeClosedIcon />}
+        </button>
+      </h2>
+
       {!gameStarted && (
         <h2 className="text-3xl font-medium">Waiting for opponent...</h2>
       )}
@@ -158,7 +176,10 @@ export default function App() {
 
           {!winner ? (
             <form
-              className="flex flex-col"
+              className={
+                "flex flex-col border-2 " +
+                (turn == userId ? "border-blue-600" : "border-transparent")
+              }
               onSubmit={(e) => {
                 e.preventDefault();
                 submitGuess();
@@ -172,12 +193,13 @@ export default function App() {
                     setGuess(e.target.value);
                   }
                 }}
+                autoFocus
                 required
               />
               <button
                 type="submit"
                 className="bg-blue-600 px-6 py-3 text-xl w-70 font-medium disabled:opacity-60"
-                disabled={!/^\d{4}$/.test(guess) || turn != userId}
+                disabled={turn != userId} //!/^\d{4}$/.test(guess) ||
               >
                 Submit Guess
               </button>
