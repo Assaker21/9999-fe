@@ -2,7 +2,7 @@ import { EyeClosedIcon, EyeIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
-const DEVELOPMENT = true;
+const DEVELOPMENT = false;
 const socket = io(
   DEVELOPMENT ? "http://localhost:3000" : "https://nine999-api.onrender.com",
 );
