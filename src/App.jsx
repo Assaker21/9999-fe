@@ -127,12 +127,9 @@ export default function App() {
             }}
             required
           />
-          <button
-            className="bg-green-600 px-4 py-2 text-lg hover:opacity-90 cursor-pointer font-medium"
-            type="submit"
-          >
+          <Button color="green" type="submit">
             Join Game
-          </button>
+          </Button>
         </form>
 
         <div className="absolute bottom-2 left-[50%] transform-[translateX(-50%)] text-gray-300 text-sm font-medium z-10">
@@ -236,12 +233,7 @@ export default function App() {
                   </div>
                   <div
                     className={
-                      "px-4 py-1 text-md font-semibold w-12 flex items-center justify-center" +
-                      (g.match == 0
-                        ? "bg-red-600"
-                        : g.match == 1
-                          ? "bg-yellow-600"
-                          : "bg-green-600")
+                      "px-4 py-1 text-md font-semibold w-12 flex items-center justify-center bg-green-600"
                     }
                   >
                     {g.match}
@@ -260,5 +252,19 @@ export default function App() {
         </a>
       </div>
     </div>
+  );
+}
+
+function Button({ children, color, ...props }) {
+  return (
+    <button
+      {...props}
+      className={
+        (color == "green" ? "bg-green-600" : "bg-blue-600") +
+        " px-4 py-2 text-lg hover:opacity-90 cursor-pointer font-medium"
+      }
+    >
+      {children}
+    </button>
   );
 }
