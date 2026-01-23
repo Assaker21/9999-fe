@@ -96,8 +96,6 @@ export default function App() {
     setGuess("");
   };
 
-  /* ---------------- UI ---------------- */
-
   if (!userId) {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-gray-950 text-white gap-2">
@@ -236,7 +234,16 @@ export default function App() {
                   <div className="flex-1 px-4 py-1 text-md font-semibold bg-gray-800">
                     {g.guess}
                   </div>
-                  <div className="px-4 py-1 text-md font-semibold bg-green-600 w-12 flex items-center justify-center">
+                  <div
+                    className={
+                      "px-4 py-1 text-md font-semibold w-12 flex items-center justify-center" +
+                      (g.match == 0
+                        ? "bg-red-600"
+                        : g.match == 1
+                          ? "bg-yellow-600"
+                          : "bg-green-600")
+                    }
+                  >
                     {g.match}
                   </div>
                 </div>
